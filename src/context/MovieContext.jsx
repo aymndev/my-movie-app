@@ -3,7 +3,7 @@ export const MovieContext=createContext();
 
 
 export default function MovieProvider({children}){
-    const [movie,setMovie]=useState(null);
+    const [movie,setMovie]=useState([]);
   
     const [loading,setLoading]=useState(false);
     const [error,setEror]=useState(null);
@@ -14,19 +14,20 @@ export default function MovieProvider({children}){
         const fetchMovie=async()=>{
             try{
                 setLoading(true)
-                const MoviesUrl=`http://www.omdbapi.com/?i=tt3896198&apikey=${API_key}`
+                const MoviesUrl = `http://www.omdbapi.com/?s=guardians&apikey=${API_key}`;
                 
-                const moviesRes= await fetch(MoviesUrl);
-                const movieData=await moviesRes.json();
+                const res= await fetch(MoviesUrl);
+                const data=await res.json();
             
-            if (movieData.Response === "False"){
+            if (data.Response === "False"){
                 setEror("movie not found")
+                setMovie([]);
                 return;
                 
             }
             setEror(null)
-            setMovie(movieData)
-            console.log("data",movieData)
+            setMovie(data.Search)
+            console.log("data",data.Search);
         } catch(err){
             setEror("Something went wrong");
         }finally{
@@ -44,8 +45,7 @@ export default function MovieProvider({children}){
             setLoading,
             error,
             setEror
-
-
+            
         }}>
             {children}
 

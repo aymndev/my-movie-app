@@ -5,6 +5,7 @@ import Home from './routes/home'
 import About from './routes/about';
 import MovieProvider from './context/MovieContext';
 
+
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from './routes/Layout';
 
