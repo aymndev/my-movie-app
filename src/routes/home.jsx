@@ -8,9 +8,9 @@ export default function home() {
   if (loading) return <p className="text-center mt-5">Loading...</p>;
   if (error) return <p className="text-center mt-5">{error}</p>;
   return (
-    <div className='flex flex-col'>
+    <div className='flex flex-col font-sans'>
       <div className='flex justify-center text-xl pt-5 '>
-        <h1>Popular Movies </h1>
+        <h1 className="font-bold pb-9">Popular Movies </h1>
 
       </div>
       <div className="flex  flex-wrap justify-center gap-4">
