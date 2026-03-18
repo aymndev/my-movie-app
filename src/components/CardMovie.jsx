@@ -1,24 +1,20 @@
 import React from 'react'
 
-import MovieProvider from '../context/MovieContext'
+
 
 
 export default function CardMovie({movie}) {
     return (
-        <div className='flex' >
-            <div className=' flex flex-col font-sans border-[1px] border-white rounded-xl w-[200px]'>
+        <div className='flex ' >
+            <div className=' flex flex-col font-sans w-[200px]'>
 
 
                 <div className=' rounded-t-xl '>
                     
-                    <img className='h-[12rem] w-full object-cover rounded-t-lg' src={movie.Poster} alt={movie.Title} />
+                    <img className='h-[23rem] w-full object-cover rounded-lg' src={movie.Poster} alt={movie.Title} />
 
                 </div>
-                <div className='flex flex-col text-center'>
-                    <h1 className='text-lg font-bold  '>{movie.Title}</h1>
-                    <p>{movie.Year}</p>
-                
-                </div>
+        
             </div>
         </div>
     )

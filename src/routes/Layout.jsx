@@ -5,11 +5,15 @@ import { Outlet } from "react-router-dom";
 export default function Layout() {
   return (
     <div className='sans'>
-        <Navebare/>
-        <div className='p-4 rounded-t-xl bg-black text-white'>
-            <Outlet/>
+      <div className="fixed top-0 left-0 w z-50 w-full">
+        <Navebare  />
 
-        </div>
+      </div>
+
+      <div className='p-4 pt-[10rem] min-h-screen  bg-gradient-to-t from-black to-gray-950 text-white'>
+        <Outlet />
+
+      </div>
     </div>
   )
 }
