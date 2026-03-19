@@ -11,7 +11,7 @@ export default function CardMovie({movie}) {
 
                 <div className=' rounded-t-xl '>
                     
-                    <img className='h-[23rem] w-full object-cover rounded-lg' src={movie.Poster} alt={movie.Title} />
+                    <img className='h-[23rem] w-full object-cover rounded-lg' src={movie.image?.medium} alt={movie.name} />
 
                 </div>
         

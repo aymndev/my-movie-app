@@ -10,7 +10,7 @@ export default function Layout() {
 
       </div>
 
-      <div className='p-4 pt-[10rem] min-h-screen  bg-gradient-to-t from-black to-gray-950 text-white'>
+      <div className='p-4   min-h-screen  bg-gradient-to-t from-black to-gray-950 text-white'>
         <Outlet />
 
       </div>

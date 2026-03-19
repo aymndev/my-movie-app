@@ -1,58 +1,44 @@
-import {createContext,useState,useEffect} from "react" ;
-export const MovieContext=createContext();
+import { createContext, useState, useEffect } from "react";
 
+export const MovieContext = createContext();
 
-export default function MovieProvider({children}){
-    const [movie,setMovie]=useState([]);
-  
-    const [loading,setLoading]=useState(false);
-    const [error,setEror]=useState(null);
-    const API_key='b9348b85';
+export default function MovieProvider({ children }) {
+  const [movie, setMovie] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-    
-    useEffect(()=>{
-        const fetchMovie=async()=>{
-            try{
-                setLoading(true)
-                const MoviesUrl = `http://www.omdbapi.com/?s=guardians&apikey=${API_key}`;
-                
-                const res= await fetch(MoviesUrl);
-                const data=await res.json();
-            
-            if (data.Response === "False"){
-                setEror("movie not found")
-                setMovie([]);
-                return;
-                
-            }
-            setEror(null)
-            setMovie(data.Search)
-            console.log("data",data.Search);
-        } catch(err){
-            setEror("Something went wrong");
-        }finally{
-            setLoading(false)
-        }
+  useEffect(() => {
+    const fetchMovie = async () => {
+      try {
+        setLoading(true);
 
-        };
-        fetchMovie();
-    },[]);
-    return(
-        <MovieContext.Provider value={{
-            movie,
-            setMovie,
-            loading,
-            setLoading,
-            error,
-            setEror
-            
-        }}>
-            {children}
+        const res = await fetch("https://api.tvmaze.com/shows");
+        const data = await res.json();
 
-        </MovieContext.Provider>
+        setError(null);
+        setMovie(data);
 
-    )
+        console.log("TVMaze data:", data);
 
+      } catch (err) {
+        setError("Something went wrong");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchMovie();
+  }, []);
+
+  return (
+    <MovieContext.Provider value={{
+      movie,
+      loading,
+      error
+    }}>
+      {children}
+    </MovieContext.Provider>
+  );
 }
 
 
