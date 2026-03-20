@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { useState } from 'react';
+import DropDown from './DropDown'
 
 
 import React from 'react'
@@ -47,8 +48,11 @@ export default function Navebare() {
 
 
                 />
-                <button className='bg-red-600 text-black p-2 rounded-r-lg'>search</button>
+                <button className='bg-red-600 text-white p-2 rounded-r-lg'>search</button>
+                <DropDown   genres={["All", "Action", "Drama"]} 
+  onSelect={(g) => console.log(g)} />
             </div>
+          
 
             <hr />
         </div>

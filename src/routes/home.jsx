@@ -74,6 +74,7 @@ export default function Home() {
                 <h1 className="text-3xl ">
                   {featuredMovie?.name}
                 </h1>
+               
                 <p className="text-3xl">
                   Year: {featuredMovie?.premiered}
 
@@ -125,9 +126,9 @@ export default function Home() {
         </div>
 
       </div>
-      <div className="flex justify-center  pt-[3rem] ">
-        <h1> Movies </h1>
-        <div className="flex flex-col grid grid-cols-6 gap-6 p-5   p-5 rounded-lg">
+      <div className="flex justify-center  pt-[3rem] flex-col ">
+        <h1 className="text-3xl font-bold ml-[6rem]"> Movies </h1>
+        <div className="flex flex-col grid grid-cols-6 gap-1 p-5   rounded-lg">
 
           {movies.slice(0,30).map((movie) => (
             <CardMovie key={movie.imdbID} movie={movie} />
