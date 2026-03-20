@@ -3,10 +3,14 @@ import React from 'react'
 
 
 
-export default function CardMovie({movie}) {
+export default function CardMovie({movie,onClick}) {
     return (
         <div className='flex ' >
-            <div className=' flex flex-col font-sans w-[200px]'>
+            <div 
+            onClick={onClick}
+            
+            className=' flex flex-col font-sans w-[200px] cursor-pointer hover:scale-105 transition"'>
+                
 
 
                 <div className=' rounded-t-xl relative group cursor-pointer pb-9'>

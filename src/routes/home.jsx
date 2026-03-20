@@ -5,6 +5,8 @@ import { MovieContext } from "../context/MovieContext"
 import { FaArrowLeft } from "react-icons/fa";
 import { FaArrowRight } from "react-icons/fa";
 import { useRef } from "react";
+import { useState } from "react";
+import { IoClose } from "react-icons/io5";
 
 
 
@@ -12,6 +14,7 @@ import { useRef } from "react";
 
 export default function Home() {
   const scrollRef = useRef(null);
+  const [selectedMovie, setSelectedMovie] = useState(null)
 
   const context = useContext(MovieContext);
   if (!context) {
@@ -74,7 +77,7 @@ export default function Home() {
                 <h1 className="text-3xl ">
                   {featuredMovie?.name}
                 </h1>
-               
+
                 <p className="text-3xl">
                   Year: {featuredMovie?.premiered}
 
@@ -130,14 +133,64 @@ export default function Home() {
         <h1 className="text-3xl font-bold ml-[6rem]"> Movies </h1>
         <div className="flex flex-col grid grid-cols-6 gap-1 p-5   rounded-lg">
 
-          {movies.slice(0,30).map((movie) => (
-            <CardMovie key={movie.imdbID} movie={movie} />
+          {movies.slice(0, 30).map((movie) => (
+            <CardMovie
+              key={movie.imdbID}
+              movie={movie}
+              onClick={() => setSelectedMovie(movie)}
+
+            />
 
 
           ))}
 
         </div>
       </div>
+      {selectedMovie && (
+        <div className="fixed inset-0 bg-black bg-opacity-80 flex justify-center items-center z-50">
+          <div className="bg-gray-950 text-red-700 p-5 rounded w-[150rem] max-w-[90%] relative ">
+
+
+            <button
+              onClick={() => setSelectedMovie(null)}
+              className="absolute top-2 right-2 text-white font-bold text-lg"
+            >
+              <IoClose />
+            </button>
+            <div className="flex flex-row gap-5">
+
+
+              <div>
+                <img
+                  src={selectedMovie?.image?.medium || selectedMovie?.image?.original}
+                  alt={selectedMovie?.name}
+                  className="w-full rounded-md h-[35rem] w-[100rem]"
+                />
+
+              </div>
+              <div className=" ">
+                <h2 className="text-3xl font-bold mt-3">{selectedMovie.name}</h2>
+
+                {/* Movie summary */}
+                <p className="mt-2  text-white whitespace-pre-line">
+                  {selectedMovie.summary?.replace(/<[^>]+>/g, "")}
+                </p>
+
+              </div>
+            </div>
+
+
+
+
+            {/* Movie title */}
+
+
+          </div>
+        </div>
+
+
+
+      )}
 
 
     </div>

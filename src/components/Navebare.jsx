@@ -49,10 +49,10 @@ export default function Navebare() {
 
                 />
                 <button className='bg-red-600 text-white p-2 rounded-r-lg'>search</button>
-                <DropDown   genres={["All", "Action", "Drama"]} 
-  onSelect={(g) => console.log(g)} />
+                <DropDown genres={["All", "Action", "Drama"]}
+                    onSelect={(g) => console.log(g)} />
             </div>
-          
+
 
             <hr />
         </div>
