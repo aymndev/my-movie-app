@@ -87,15 +87,6 @@ src/
 
 ---
 
-## 💡 Future Improvements
-
-* 🎥 Add movie details page
-* ▶️ Watch trailers inside the app
-* ❤️ Add favorites system
-* 🔐 Authentication (login/register)
-* 🌙 Dark mode toggle
-
----
 
 
 
