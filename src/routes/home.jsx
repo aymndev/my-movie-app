@@ -4,11 +4,14 @@ import CardMovie from '../components/CardMovie'
 import { MovieContext } from "../context/MovieContext"
 import { FaArrowLeft } from "react-icons/fa";
 import { FaArrowRight } from "react-icons/fa";
+import { useRef } from "react";
+
 
 
 
 
 export default function Home() {
+  const scrollRef = useRef(null);
 
   const context = useContext(MovieContext);
   if (!context) {
@@ -25,8 +28,16 @@ export default function Home() {
   const featuredMovie = movies[0];
   const highQualityPoster = featuredMovie?.image?.original.replace("SX300", "SX700");
   const cleanSummary = featuredMovie?.summary
-  ?.replace(/<[^>]+>/g, "")
-  ?.replace(/\.\s*/g, ".\n");
+    ?.replace(/<[^>]+>/g, "")
+    ?.replace(/\.\s*/g, ".\n");
+  const scrollLeft = () => {
+    scrollRef.current.scrollBy({ left: -300, behavior: "smooth" });
+  };
+
+  const scrollRight = () => {
+    scrollRef.current.scrollBy({ left: 300, behavior: "smooth" });
+  };
+
 
   return (
     <div className='flex flex-col font-sans  min-h-screen max-w-[1550px] mx-auto'>
@@ -38,20 +49,20 @@ export default function Home() {
         />
         <div className="absolute top-0 left-0  w-full h-full flex flex-col justify-center mt-[8rem] ml-9">
           <div className="flex  gap-5 ">
-          <div className="flex flex-row">
-            <img
-              src={highQualityPoster}
-              alt={highQualityPoster}
-              className="h-[17rem] w-[13rem] pb-2 "
+            <div className="flex flex-row">
+              <img
+                src={highQualityPoster}
+                alt={highQualityPoster}
+                className="h-[17rem] w-[13rem] pb-2 "
 
 
-            />
+              />
 
-          </div>
-          <div className="flex justify-center  text-lg pr-[11rem] pt-[4rem] whitespace-pre-line text-white max-w-lg">
-            <p className="">{cleanSummary}</p>
+            </div>
+            <div className="flex justify-center  text-lg pr-[11rem] pt-[4rem] whitespace-pre-line text-white max-w-lg">
+              <p className="">{cleanSummary}</p>
 
-          </div>
+            </div>
 
           </div>
 
@@ -90,16 +101,16 @@ export default function Home() {
 
       </div>
       <div className="flex flex-row justify-center gap-[5rem] ">
-        <div className=" flex justify-center items-center">
+        <div onClick={scrollLeft} className=" flex justify-center items-center">
           <FaArrowLeft />
 
         </div>
 
 
-        <div className="flex  flex-wrap justify-center gap-4">
-          <div className="flex  flex-wrap justify-center gap-4 bg-gray-900 p-5 rounded-lg">
+        <div ref={scrollRef} className="flex gap-4 overflow-x-auto scroll-smooth">
+          <div className="flex   justify-center gap-4 bg-gray-900 p-5 rounded-lg">
 
-            {movies.slice(0, 6).map((movie) => (
+            {movies.slice(15, 25).map((movie) => (
               <CardMovie key={movie.imdbID} movie={movie} />
 
 
@@ -108,11 +119,23 @@ export default function Home() {
           </div>
 
         </div>
-        <div className=" flex justify-center items-center">
+        <div onClick={scrollRight} className=" flex justify-center items-center">
           <FaArrowRight />
 
         </div>
 
+      </div>
+      <div className="flex justify-center  pt-[3rem] ">
+        <h1> Movies </h1>
+        <div className="flex flex-col grid grid-cols-6 gap-6 p-5   p-5 rounded-lg">
+
+          {movies.slice(0,30).map((movie) => (
+            <CardMovie key={movie.imdbID} movie={movie} />
+
+
+          ))}
+
+        </div>
       </div>
 
 
