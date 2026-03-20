@@ -33,11 +33,8 @@ This project uses the public API from:
 
 ---
 
-## 📸 Screenshots
 
-*(Add your screenshots here)*
 
----
 
 ## ⚙️ Installation
 
