@@ -97,14 +97,6 @@ src/
 
 ---
 
-## 👨‍💻 Author
 
-* Your Name
-
----
-
-## ⭐ Support
-
-If you like this project, feel free to ⭐ the repo and share it!
 
 ---
