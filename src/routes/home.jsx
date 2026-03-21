@@ -82,7 +82,7 @@ export default function Home() {
 
           <div className="flex flex-col">
             <div className="flex flex-row  ">
-              <div className="flex flex-col">
+              <div className="flex flex-col text-white">
 
                 <h1 className="text-3xl ">
                   {featuredMovie?.name}
