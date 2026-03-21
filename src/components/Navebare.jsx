@@ -1,27 +1,23 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { useContext, useState } from 'react';
 import DropDown from './DropDown'
-
 import { MovieContext } from "../context/MovieContext";
-
 import React from 'react'
-import { Outlet, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 
 export default function Navebare({ onSearch }) {
+    
     const { movie: movies = [] } = useContext(MovieContext);
     const [input, setInput] = useState("");
     
-
     function handleSearch() {
         const filtered = movies.filter(movie =>
            (movie.name || movie.title || "").toLowerCase().includes(input.toLowerCase())
         );
-        onSearch(filtered);
+        onSearch(filtered); 
         setInput("");
-        
-    }
-
+      }
   
 
 
@@ -31,7 +27,6 @@ export default function Navebare({ onSearch }) {
 
 
 
-                {/*hover:underline rounded-lg p-1  */}
                 <nav className='flex gap-[50px]'>
                     <NavLink to='/'
                         className={({ isActive }) =>
@@ -65,8 +60,12 @@ export default function Navebare({ onSearch }) {
 
                 />
                 <button  onClick={handleSearch}  className='bg-red-600 text-white p-2 rounded-r-lg'>search</button>
-                <DropDown genres={["All", "Action", "Drama"]}
-                    onSelect={(g) => console.log(g)} />
+                <DropDown 
+                genres={["All", "Action", "Drama", "Comedy"]}
+                onSelect={onSelectGenre}
+
+                
+                />
             </div>
 
 

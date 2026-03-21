@@ -16,10 +16,12 @@ import { IoClose } from "react-icons/io5";
 
 export default function Home() {
   const { filteredMovies } = useOutletContext();
+  const moviesToShow = filteredMovies;
   const { movie: movies = [], loading, error } = useContext(MovieContext);
-  const moviesToShow = filteredMovies.length > 0 ? filteredMovies : movies;
+ 
   const scrollRef = useRef(null);
   const [selectedMovie, setSelectedMovie] = useState(null)
+  
   
 
   const context = useContext(MovieContext);
