@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { useOutletContext } from "react-router-dom"
 
 import CardMovie from '../components/CardMovie'
 import { MovieContext } from "../context/MovieContext"
@@ -12,16 +13,22 @@ import { IoClose } from "react-icons/io5";
 
 
 
+
 export default function Home() {
+  const { filteredMovies } = useOutletContext();
+  const { movie: movies = [], loading, error } = useContext(MovieContext);
+  const moviesToShow = filteredMovies.length > 0 ? filteredMovies : movies;
   const scrollRef = useRef(null);
   const [selectedMovie, setSelectedMovie] = useState(null)
+  
 
   const context = useContext(MovieContext);
   if (!context) {
     return <p className="text-red-500">Context not working</p>;
   }
 
-  const { movie: movies = [], loading, error } = useContext(MovieContext);
+ 
+ 
   console.log("movies:", movies);
   if (!movies || movies.length === 0) {
     return <p>No movies found</p>;
@@ -40,6 +47,7 @@ export default function Home() {
   const scrollRight = () => {
     scrollRef.current.scrollBy({ left: 300, behavior: "smooth" });
   };
+  
 
 
   return (
@@ -133,7 +141,7 @@ export default function Home() {
         <h1 className="text-3xl font-bold ml-[6rem]"> Movies </h1>
         <div className="flex flex-col grid grid-cols-6 gap-1 p-5   rounded-lg">
 
-          {movies.slice(0, 30).map((movie) => (
+          {moviesToShow.map((movie) => (
             <CardMovie
               key={movie.imdbID}
               movie={movie}
@@ -148,19 +156,19 @@ export default function Home() {
       </div>
       {selectedMovie && (
         <div className="fixed inset-0 bg-black bg-opacity-80 flex justify-center items-center z-50">
-          <div className="bg-gray-950 text-red-700 p-5 rounded w-[150rem] max-w-[90%] relative ">
+          <div className="bg-gray-950 text-red-700 p-5 rounded w-[80rem] max-w-[70%] relative ">
 
 
             <button
               onClick={() => setSelectedMovie(null)}
-              className="absolute top-2 right-2 text-white font-bold text-lg"
+              className="absolute top-2 right-3 text-white font-bold text-lg"
             >
               <IoClose />
             </button>
             <div className="flex flex-row gap-5">
 
 
-              <div>
+              <div className="w-[30%] ">
                 <img
                   src={selectedMovie?.image?.medium || selectedMovie?.image?.original}
                   alt={selectedMovie?.name}
@@ -168,7 +176,7 @@ export default function Home() {
                 />
 
               </div>
-              <div className=" ">
+              <div className=" w-[40%] m-9 ml-[9rem] justify-center items-center">
                 <h2 className="text-3xl font-bold mt-3">{selectedMovie.name}</h2>
 
                 {/* Movie summary */}
@@ -182,7 +190,6 @@ export default function Home() {
 
 
 
-            {/* Movie title */}
 
 
           </div>
