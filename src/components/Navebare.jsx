@@ -6,18 +6,25 @@ import React from 'react'
 import { NavLink } from "react-router-dom";
 
 
-export default function Navebare({ onSearch }) {
+export default function Navebare({ onSearch, onSelectGenre }) {
     
     const { movie: movies = [] } = useContext(MovieContext);
     const [input, setInput] = useState("");
     
+   
+    
     function handleSearch() {
-        const filtered = movies.filter(movie =>
-           (movie.name || movie.title || "").toLowerCase().includes(input.toLowerCase())
-        );
-        onSearch(filtered); 
+        if(input.trim==""){
+            onSearch("")
+            return;
+        }
+        // const filtered = movies.filter(movie =>
+         //   (movie.name || movie.title || "").toLowerCase().includes(input.toLowerCase())
+        // );
+        onSearch(input); 
         setInput("");
       }
+
   
 
 
@@ -62,7 +69,7 @@ export default function Navebare({ onSearch }) {
                 <button  onClick={handleSearch}  className='bg-red-600 text-white p-2 rounded-r-lg'>search</button>
                 <DropDown 
                 genres={["All", "Action", "Drama", "Comedy"]}
-                onSelect={onSelectGenre}
+                onSelect={onSelectGenre} 
 
                 
                 />

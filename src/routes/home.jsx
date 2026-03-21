@@ -125,7 +125,7 @@ export default function Home() {
           <div className="flex   justify-center gap-4 bg-gray-900 p-5 rounded-lg">
 
             {movies.slice(15, 25).map((movie) => (
-              <CardMovie key={movie.imdbID} movie={movie} />
+              <CardMovie key={movie.id} movie={movie} />
 
 
             ))}
@@ -145,7 +145,7 @@ export default function Home() {
 
           {moviesToShow.map((movie) => (
             <CardMovie
-              key={movie.imdbID}
+              key={movie.id}
               movie={movie}
               onClick={() => setSelectedMovie(movie)}
 

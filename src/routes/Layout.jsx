@@ -16,9 +16,11 @@ export default function Layout() {
       result = result.filter(movie => movie.genres?.includes(selectedGenre));
     }
 
-    if (searchTerm) {
-      result = result.filter(movie => 
-        (movie.name || movie.title || "").toLowerCase().includes(searchTerm.toLowerCase())
+    if (searchTerm && typeof searchTerm === "string") {
+      result = result.filter(movie =>
+        (movie.name || movie.title || "")
+          .toLowerCase()
+          .includes(searchTerm.toLowerCase())
       );
     }
 
@@ -29,16 +31,15 @@ export default function Layout() {
 
     <div className='sans'>
       <div className="fixed top-0 left-0 w z-50 w-full">
-        <Navebare   onSearch={setSearchTerm}       // for search input
-  onSelectGenre={setSelectedGenre} />
+        <Navebare   
+          onSearch={setSearchTerm}
+          onSelectGenre={setSelectedGenre}
+         />
 
       </div>
 
       <div className='p-4   min-h-screen  bg-gradient-to-t from-black to-gray-950 text-white'>
-        {filteredMovies.map(movie => (
-          <div key={movie.id}>{movie.name}</div>
 
-        ))}
         <Outlet context={{ filteredMovies, setSelectedGenre }} />
 
       </div>
